@@ -7,6 +7,7 @@ spec:
       command:
         - cat
       tty: true
+
     - name: docker
       image: docker:18.06.1
       command: ["tail", "-f", "/dev/null"]
@@ -14,6 +15,10 @@ spec:
       volumeMounts:
         - name: docker
           mountPath: /var/run/docker.sock # We use the k8s host docker engine
+
+    - name: 'kubectl'
+      image: 'bitnami/kubectl'
+      tty: true
   volumes:
     - name: docker
       hostPath:

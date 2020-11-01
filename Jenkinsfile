@@ -19,13 +19,21 @@ pipeline {
           }
       }
 
-      stage('Build and push Docker Im') {
+      stage('Build and push Docker Image') {
           steps {
             container('docker') {  
               sh "docker build -t kanchimo/python-simple-app:$BUILD_NUMBER -t kanchimo/python-simple-app:latest ."
               sh "docker login -u kanchimo -p $DOCKERHUB_PW"
               sh "docker push kanchimo/python-simple-app:$BUILD_NUMBER"
               sh "docker push kanchimo/python-simple-app:latest"
+            }
+          }
+      }
+
+      stage('Deploy to dev') {
+          steps {
+            container('kubectl') {  
+              sh "version"
             }
           }
       }
