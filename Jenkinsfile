@@ -22,9 +22,10 @@ pipeline {
       stage('Build and push Docker Im') {
           steps {
             container('docker') {  
-              sh "docker build -t kanchimo/python-simple-app:$BUILD_NUMBER -t ."
+              sh "docker build -t kanchimo/python-simple-app:$BUILD_NUMBER -t kanchimo/python-simple-app:latest ."
               sh "docker login -u kanchimo -p $DOCKERHUB_PW"
               sh "docker push kanchimo/python-simple-app:$BUILD_NUMBER"
+              sh "docker push kanchimo/python-simple-app:latest"
             }
           }
       }
