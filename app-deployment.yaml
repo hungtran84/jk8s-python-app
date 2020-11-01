@@ -33,6 +33,6 @@ spec:
     spec:
       containers:
       - name: python-simple-app
-        image: kanchimo/python-simple-app:8
+        image: kanchimo/python-simple-app
         ports:
         - containerPort: 8000
